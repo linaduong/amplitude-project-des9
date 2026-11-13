@@ -1,5 +1,6 @@
 *.zip
-notes.py
+\dezipped_folder
+extraction.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
