@@ -1,6 +1,7 @@
 *.zip
 \dezipped_folder
 extraction.py
+*.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
