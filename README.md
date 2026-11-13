@@ -1,5 +1,5 @@
 # amplify-project
-The Amplify Project is using Amplify's Export API (https://amplitude.com/docs/apis/analytics/export) to bring back data of website interactions. 
+The Amplify Project is using Amplify's Export API (https://amplitude.com/docs/apis/analytics/export) to bring back data of the TIL website interactions. 
 
 This project was used to consolidate understanding of Python, combining separate elements from various Python projects we had done over the few days to call the API and to save that data locally.
 
