@@ -16,7 +16,7 @@ yesterday_format = yesterday.strftime('%Y%m%d')
 #making logging directory
 log_dir = 'logs'
 os.makedirs(log_dir, exist_ok=True)
-log_filename = f'{log_dir}/{yesterday_format}.log'
+log_filename = f'{log_dir}/{date.today()}.log'
 
 logging.basicConfig(
     filename = log_filename,
