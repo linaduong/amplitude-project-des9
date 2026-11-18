@@ -21,12 +21,13 @@ logging.basicConfig(
 logger = logging.getLogger()
 logger.info('logger was successfully initialised')
 
+data_dir = 'data_zip'
+file_names = os.listdir(data_dir)
+
+#defining aws credentials for session
 AWS_ACCESS_KEY=os.getenv('AWS_ACCESS_KEY')
 AWS_SECRET_KEY=os.getenv('AWS_SECRET_KEY')
 AWS_BUCKET=os.getenv('AWS_BUCKET')
-
-data_dir = 'data_zip'
-file_names = os.listdir(data_dir)
 
 s3_client = boto3.client(
     's3',
@@ -43,6 +44,7 @@ for file in file_names:
         logger.info(f'file {file} successfully uploaded!')
         #removing uploaded files
         os.remove(to_upload)
+        logger.info(f'file {file} was deleted locally')
     except Exception as e:
         print(f'something went wrong 🫪, error {e}')
         logger.error(f'something went wrong, error {e}')
