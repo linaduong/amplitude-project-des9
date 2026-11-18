@@ -13,13 +13,13 @@ import requests
 load_dotenv()
 
 #time stamp string of yesterday's date for file name
-yesterday = date.today() - timedelta(days=1)
+yesterday = date.today() - timedelta(days=2)
 yesterday_format = yesterday.strftime('%Y%m%d')
 
 #making logging directory
 log_dir = 'logs'
 os.makedirs(log_dir, exist_ok=True)
-log_filename = f'{log_dir}/{yesterday_format}.log'
+log_filename = f'{log_dir}/{date.today()}.log'
 
 logging.basicConfig(
     filename = log_filename,
@@ -62,7 +62,7 @@ while attempts <= max_attempts:
             logger.info(f'file has been successfully saved as {filename}')
         except Exception as e:
             print(f'error occured when saving the zip {e}')
-            logger.error(f'')
+            logger.error(f'error occured when saving the zip {e}')
         break
 
     elif 300< status_code <404:
@@ -104,7 +104,7 @@ data_path = os.path.abspath('c:data')
 
 #gets the name of zips within the folder
 zf_names = os.listdir(data_path)
-print(zf_names)
+#print(zf_names)
 
 #does a loop to get the path names to the zip files
 for zf_path_loop in zf_names:
@@ -141,6 +141,8 @@ for zf_path_loop in zf_names:
                         shutil.copyfileobj(gz_file, out_file)
                     
                     logger.info(f"Successfully processed: {file} -> {json_filename}")
+                    os.remove(filename)
+                    logger.info(f'file {file} was deleted') 
                 except Exception as e:
                     logger.error(f"Failed to process file {file}: {str(e)}")
 
@@ -153,5 +155,6 @@ for zf_path_loop in zf_names:
         logger.error(f"Failed to delete temp directory: {str(e)}")
 
 print("All files extracted to the 'data' directory!")
+logger.info(f'All files extracted to {zip_data_dir}')
 
 
