@@ -31,7 +31,7 @@ def zip_to_json(data_dir:str, data_dir_save:str):
 
     #does a loop to get the path names to the zip files
     for zf_path_loop in zf_names:
-        zf_path = (f'{data_path}\\{zf_path_loop}')
+        zf_path = (f'{data_path}//{zf_path_loop}')
 
         try:
             # Extract the main zip file into the temporary directory
