@@ -21,7 +21,7 @@ def zip_to_json(data_dir:str, data_dir_save:str):
     logger.info('temporary directory set up')
 
     #gets the file path for the data folder
-    data_path = os.path.abspath(f'c:{data_dir}')
+    data_path = os.path.abspath(f'{data_dir}')
 
     #gets the name of zips within the folder
     zf_names = os.listdir(data_path)
