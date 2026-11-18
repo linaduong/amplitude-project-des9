@@ -77,7 +77,7 @@ def zip_to_json(data_dir:str, data_dir_save:str):
             logger.error(f"failed to delete temp directory: {str(e)}")
     zf_names = os.listdir(data_path)
     for zf_path_loop in zf_names:
-            zf_path = (f'{data_path}\\{zf_path_loop}')
+            zf_path = (f'{data_path}//{zf_path_loop}')
             if zf_path.endswith(".zip"):
                 os.remove(zf_path)
                 logger.info(f'{zf_names} has been deleted from local')
