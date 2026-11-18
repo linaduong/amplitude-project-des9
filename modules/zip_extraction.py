@@ -1,7 +1,6 @@
 import os
 import json
 import gzip
-import time
 import logging
 import tempfile
 import shutil
@@ -9,7 +8,13 @@ import zipfile
 
 logger = logging.getLogger(__name__)
 
-def zip_to_json(data_dir:str, ):
+def zip_to_json(data_dir:str, data_dir_save:str):
+    """function to extract zip to jsons
+
+        Args:
+            data_dir (str): put location as to where the data is for extraction
+            data_dir_save (str): put location as to where you want to save your data (this currently cannot be the same as your data_dir)
+    """
 
     # Create a temporary directory for extraction
     temp_dir = tempfile.mkdtemp()
@@ -20,6 +25,9 @@ def zip_to_json(data_dir:str, ):
 
     #gets the name of zips within the folder
     zf_names = os.listdir(data_path)
+
+    #creates a folder to save the jsons in
+    os.makedirs(data_dir_save, exist_ok=True)
 
     #does a loop to get the path names to the zip files
     for zf_path_loop in zf_names:
@@ -49,16 +57,16 @@ def zip_to_json(data_dir:str, ):
                     try:
                         gz_path = os.path.join(root, file)
                         json_filename = file[:-3]  # Remove .gz extension
-                        output_path = os.path.join(data_dir, json_filename)
+                        output_path = os.path.join(data_dir_save, json_filename)
 
                         with gzip.open(gz_path, 'rb') as gz_file, open(output_path, 'wb') as out_file:
                             shutil.copyfileobj(gz_file, out_file)
                         
                         logger.info(f"Successfully processed: {file} -> {json_filename}")
-                        os.remove(filename)
+                        os.remove(file)
                         logger.info(f'file {file} was deleted') 
                     except Exception as e:
-                        logger.error(f"Failed to process file {file}: {str(e)}")
+                        logger.error(f"failed to process file {file}: {str(e)}")
 
         try:
             # Delete the temporary directory
@@ -66,7 +74,13 @@ def zip_to_json(data_dir:str, ):
             logger.info("Temp directory deleted")
 
         except Exception as e:
-            logger.error(f"Failed to delete temp directory: {str(e)}")
-
-    print("All files extracted to the 'data' directory!")
-    logger.info(f'All files extracted to {data_dir}')
+            logger.error(f"failed to delete temp directory: {str(e)}")
+    zf_names = os.listdir(data_path)
+    for zf_path_loop in zf_names:
+            zf_path = (f'{data_path}\\{zf_path_loop}')
+            if zf_path.endswith(".zip"):
+                os.remove(zf_path)
+                logger.info(f'{zf_names} has been deleted from local')
+    print("all files extracted to the 'data' directory!")
+    logger.info(f'all files extracted to {data_dir_save}')
+    return True
