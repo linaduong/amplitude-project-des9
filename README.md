@@ -2,9 +2,7 @@
 
 The Amplitude Project is using Amplitude's Export API (https://amplitude.com/docs/apis/analytics/export) to bring back data of the TIL website interactions.
 
-This data includes PII, such as IP addresses, geographical data, to user IDs and therefore have not been committed to the repo.
-
-This particular script brings back website traffic data from the previous day with considerations as to bringing back any missing data. This is the loaded into an S3 bucket on our AWS account and loaded into Snowflake.
+This data includes PII, such as IP addresses, geographical data, to user ids and therefore have not been committed to the repo.
 
 Then, this data can then be used to understand how visitors use our website. Allowing further understanding behaviours and identify potential pain points and hotspots to configure our website further.
 
